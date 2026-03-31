@@ -1,0 +1,460 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww29200\viewh16000\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 <!DOCTYPE html>\
+<html lang="es">\
+<head>\
+<meta charset="UTF-8"/>\
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>\
+<title>\uc0\u55356 \u57263  Challenge Review Balancer</title>\
+<style>\
+  * \{ box-sizing: border-box; margin: 0; padding: 0; \}\
+  body \{ font-family: Inter, system-ui, sans-serif; background: #f8fafc; min-height: 100vh; padding: 24px 20px; \}\
+  .wrap \{ max-width: 700px; margin: 0 auto; \}\
+  h1 \{ font-size: 20px; font-weight: 800; color: #0f172a; \}\
+  .sub \{ color: #94a3b8; font-size: 12px; margin-top: 4px; \}\
+  .sub a \{ color: #94a3b8; \}\
+  .tabs \{ display: flex; gap: 6px; margin: 20px 0; \}\
+  .tab \{ padding: 8px 20px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; font-size: 13px; background: #e2e8f0; color: #475569; transition: all .15s; \}\
+  .tab.active \{ background: #2563eb; color: #fff; \}\
+  .card \{ background: #fff; border-radius: 12px; padding: 18px; box-shadow: 0 1px 3px rgba(0,0,0,.08); margin-bottom: 12px; \}\
+  .section-title \{ font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px; \}\
+  .grid2 \{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; \}\
+  .acard \{ border-radius: 10px; padding: 12px 14px; \}\
+  .acard-header \{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 7px; \}\
+  .acard-title \{ font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; \}\
+  .acard-badge \{ font-size: 10px; opacity: .7; \}\
+  select, input \{ width: 100%; padding: 9px 12px; border-radius: 8px; border: 1.5px solid #e2e8f0; font-size: 13px; background: #fff; cursor: pointer; outline: none; font-family: inherit; \}\
+  select:focus, input:focus \{ border-color: #2563eb; \}\
+  .pos-select \{ font-weight: 700; \}\
+  .summary \{ margin-top: 12px; padding: 12px 14px; background: #f1f5f9; border-radius: 8px; font-size: 13px; color: #334155; line-height: 1.9; \}\
+  .msg-box \{ margin-top: 10px; background: #f1f5f9; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #334155; font-family: monospace; line-height: 1.6; word-break: break-word; \}\
+  .btn \{ width: 100%; padding: 12px; border-radius: 10px; border: none; cursor: pointer; font-size: 14px; font-weight: 700; transition: all .2s; font-family: inherit; \}\
+  .btn-copy \{ background: #fff; border: 1.5px solid #e2e8f0; color: #334155; margin-top: 8px; \}\
+  .btn-copy.copied \{ background: #f0fdf4; border-color: #86efac; color: #16a34a; \}\
+  .warning \{ background: #fef3c7; border: 1px solid #fcd34d; border-radius: 7px; padding: 7px 12px; font-size: 12px; color: #92400e; margin-top: 6px; \}\
+  .info-box \{ background: #fefce8; border: 1.5px solid #fde68a; border-radius: 12px; padding: 12px 16px; margin-bottom: 14px; font-size: 13px; color: #92400e; \}\
+  .rules-box \{ background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; font-size: 12px; color: #64748b; \}\
+  .rules-box ol \{ margin: 6px 0 0 16px; line-height: 2; \}\
+  /* Stats */\
+  .bar-row \{ display: flex; align-items: center; gap: 10px; margin-bottom: 8px; \}\
+  .bar-label \{ width: 130px; font-size: 13px; color: #334155; flex-shrink: 0; \}\
+  .bar-track \{ flex: 1; background: #f1f5f9; border-radius: 99px; height: 16px; overflow: hidden; \}\
+  .bar-fill \{ height: 100%; border-radius: 99px; transition: width .4s; \}\
+  .bar-count \{ font-size: 13px; font-weight: 700; width: 22px; text-align: right; \}\
+  .chip \{ border-radius: 99px; padding: 5px 14px; font-size: 13px; font-weight: 700; display: inline-block; margin: 4px; \}\
+  .progress-row \{ display: flex; align-items: center; gap: 10px; margin-bottom: 8px; \}\
+  .progress-label \{ width: 130px; font-size: 13px; color: #334155; flex-shrink: 0; \}\
+  .history-item \{ display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 7px; font-size: 12px; border: 1px solid #f1f5f9; margin-bottom: 5px; \}\
+  .history-scroll \{ max-height: 260px; overflow-y: auto; \}\
+  .tag \{ border-radius: 99px; padding: 1px 7px; font-size: 10px; font-weight: 700; flex-shrink: 0; \}\
+  .hidden \{ display: none; \}\
+</style>\
+</head>\
+<body>\
+<div class="wrap">\
+\
+  <!-- Header -->\
+  <div style="margin-bottom:20px">\
+    <h1>\uc0\u55356 \u57263  Challenge Review Balancer</h1>\
+    <p class="sub" id="sync-label">Sync: 31/03/2026 \'b7 11 reviews \'b7 Para actualizar: pedile a Claude "sync Notion"</p>\
+  </div>\
+\
+  <!-- Tabs -->\
+  <div class="tabs">\
+    <button class="tab active" onclick="switchTab('asignar')">\uc0\u10024  Asignar</button>\
+    <button class="tab" onclick="switchTab('stats')">\uc0\u55357 \u56522  Stats</button>\
+  </div>\
+\
+  <!-- \uc0\u9472 \u9472  TAB ASIGNAR \u9472 \u9472  -->\
+  <div id="tab-asignar">\
+    <div class="info-box">\
+      <strong>Flujo:</strong> Eleg\'ed la posici\'f3n \uc0\u8594  ajust\'e1 si quer\'e9s \u8594  copi\'e1 el mensaje \u8594  pegalo en Claude.\
+    </div>\
+\
+    <!-- Posici\'f3n -->\
+    <div class="card">\
+      <p class="section-title">Posici\'f3n del candidato</p>\
+      <select id="position-select" class="pos-select" onchange="onPositionChange()">\
+        <option>Software Engineer</option>\
+        <option>Mobile Engineer</option>\
+        <option>Product Designer</option>\
+        <option>Data Scientist</option>\
+        <option>Platform Engineer</option>\
+        <option>Other</option>\
+      </select>\
+    </div>\
+\
+    <!-- Asignaci\'f3n -->\
+    <div class="card">\
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">\
+        <p class="section-title" style="margin:0">Asignaci\'f3n sugerida</p>\
+        <span id="pos-chip" class="chip" style="font-size:12px;padding:3px 10px"></span>\
+      </div>\
+      <div class="grid2">\
+        <div class="acard" style="background:#eff6ff">\
+          <div class="acard-header">\
+            <span class="acard-title" style="color:#2563eb">\uc0\u55357 \u56593  DRI</span>\
+            <span class="acard-badge" style="color:#2563eb" id="badge-dri"></span>\
+          </div>\
+          <select id="sel-dri" onchange="onOverrideChange()">\
+            <option>JP</option>\
+            <option>Seven</option>\
+          </select>\
+        </div>\
+        <div class="acard" style="background:#f0fdf4">\
+          <div class="acard-header">\
+            <span class="acard-title" style="color:#16a34a">\uc0\u55357 \u56420  Reviewer 1</span>\
+            <span class="acard-badge" style="color:#16a34a" id="badge-r1"></span>\
+          </div>\
+          <select id="sel-r1" onchange="onOverrideChange()"></select>\
+        </div>\
+        <div class="acard" style="background:#f0fdf4">\
+          <div class="acard-header">\
+            <span class="acard-title" style="color:#16a34a">\uc0\u55357 \u56420  Reviewer 2</span>\
+            <span class="acard-badge" style="color:#16a34a" id="badge-r2"></span>\
+          </div>\
+          <select id="sel-r2" onchange="onOverrideChange()"></select>\
+        </div>\
+        <div class="acard" style="background:#fefce8">\
+          <div class="acard-header">\
+            <span class="acard-title" style="color:#b45309">\uc0\u55356 \u57252  Devoluci\'f3n</span>\
+            <span class="acard-badge" style="color:#b45309" id="badge-dev"></span>\
+          </div>\
+          <select id="sel-dev" onchange="onOverrideChange()"></select>\
+        </div>\
+      </div>\
+      <!-- Warnings -->\
+      <div id="warnings"></div>\
+      <!-- Summary -->\
+      <div class="summary">\
+        <strong>Resumen:</strong><br/>\
+        \uc0\u55357 \u56593  DRI: <strong id="sum-dri"></strong><br/>\
+        \uc0\u55357 \u56420  Reviewers: <strong id="sum-r1"></strong> + <strong id="sum-r2"></strong><br/>\
+        \uc0\u55356 \u57252  Devoluci\'f3n: <strong id="sum-dev" style="color:#b45309"></strong>\
+      </div>\
+      <!-- Message -->\
+      <div class="msg-box" id="msg-box"></div>\
+      <button class="btn btn-copy" id="copy-btn" onclick="copyMsg()">\uc0\u55357 \u56523  Copiar mensaje para Claude</button>\
+    </div>\
+\
+    <!-- Rules -->\
+    <div class="rules-box">\
+      <strong style="color:#334155">Reglas activas:</strong>\
+      <ol>\
+        <li>DRI: siempre JP o Seven</li>\
+        <li>Seven solo hace devoluciones con reviewers onboardeados</li>\
+        <li>Al menos 1 reviewer en onboarding \uc0\u55357 \u56580  por review</li>\
+        <li>Product Designer \uc0\u8594  siempre Nicol\'e1s Santangelo</li>\
+        <li>Tobias siempre con Lucas Serruya o Rocket</li>\
+      </ol>\
+    </div>\
+  </div>\
+\
+  <!-- \uc0\u9472 \u9472  TAB STATS \u9472 \u9472  -->\
+  <div id="tab-stats" class="hidden">\
+    <!-- Onboarding progress -->\
+    <div class="card">\
+      <p class="section-title">\uc0\u55357 \u56580  Progreso de onboarding</p>\
+      <div id="onboarding-bars"></div>\
+    </div>\
+    <!-- Reviews por perfil -->\
+    <div class="card">\
+      <p class="section-title">\uc0\u55357 \u56513  Reviews por perfil</p>\
+      <div id="profile-chips"></div>\
+    </div>\
+    <!-- DRI load -->\
+    <div class="card">\
+      <p class="section-title">\uc0\u55357 \u56593  DRI load</p>\
+      <div id="dri-bars"></div>\
+    </div>\
+    <!-- Reviewer load -->\
+    <div class="card">\
+      <p class="section-title">\uc0\u55357 \u56420  Reviewer load</p>\
+      <div id="reviewer-bars"></div>\
+    </div>\
+    <!-- Devoluci\'f3n load -->\
+    <div class="card">\
+      <p class="section-title">\uc0\u55356 \u57252  Devoluci\'f3n load</p>\
+      <div id="dev-bars"></div>\
+    </div>\
+    <!-- History -->\
+    <div class="card">\
+      <p class="section-title" id="history-title"></p>\
+      <div class="history-scroll" id="history-list"></div>\
+    </div>\
+  </div>\
+\
+</div>\
+<script>\
+// \uc0\u9472 \u9472 \u9472  Data \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+const DRIS = ["JP","Seven"];\
+const REVIEWERS = \{\
+  "Lucas Serruya":      \{ status:"onboarded" \},\
+  "Alvaro Crespo":      \{ status:"onboarded" \},\
+  "Franco Mucci":       \{ status:"onboarded" \},\
+  "Nicol\'e1s Santangelo": \{ status:"onboarded", pdOnly:true \},\
+  "Rocket":             \{ status:"onboarding" \},\
+  "Fede Jordan":        \{ status:"onboarding" \},\
+  "Kevin P.":           \{ status:"onboarding" \},\
+  "Tobias":             \{ status:"onboarding", mustPairWith:["Lucas Serruya","Rocket"] \},\
+\};\
+const POOL      = Object.keys(REVIEWERS);\
+const ONBOARDED = POOL.filter(r => REVIEWERS[r].status === "onboarded");\
+const ONBOARDING= POOL.filter(r => REVIEWERS[r].status === "onboarding");\
+\
+const POS_COLORS = \{\
+  "Software Engineer": \{ bg:"#eff6ff", color:"#2563eb" \},\
+  "Mobile Engineer":   \{ bg:"#f0fdf4", color:"#16a34a" \},\
+  "Product Designer":  \{ bg:"#fdf4ff", color:"#9333ea" \},\
+  "Data Scientist":    \{ bg:"#fff7ed", color:"#ea580c" \},\
+  "Platform Engineer": \{ bg:"#f0f9ff", color:"#0284c7" \},\
+  "Other":             \{ bg:"#f8fafc", color:"#64748b" \},\
+\};\
+\
+const HISTORY = [\
+  \{ candidate:"Alfredo Perez Leal",  position:"Mobile Engineer",   dri:"JP",    reviewers:["Kevin P.","Lucas Berdiales"],  devolucion:"Lucas Berdiales" \},\
+  \{ candidate:"Gonzalo Martone",     position:"Software Engineer", dri:"Seven", reviewers:["Kevin P.","Lucas Serruya"],    devolucion:"Lucas Serruya" \},\
+  \{ candidate:"Jer\'f3nimo Misa",       position:"Software Engineer", dri:"JP",    reviewers:["Lucas Berdiales","Nator"],     devolucion:"Nator" \},\
+  \{ candidate:"Claudio Barril",      position:"Software Engineer", dri:"JP",    reviewers:["Nator","Lucas Berdiales"],     devolucion:"Nator" \},\
+  \{ candidate:"Mauro Spivak",        position:"Software Engineer", dri:"JP",    reviewers:["Kevin P.","Fede Jordan"],      devolucion:"Fede Jordan" \},\
+  \{ candidate:"Maximiliano Rey",     position:"Software Engineer", dri:"JP",    reviewers:["Kevin P.","Fede Jordan"],      devolucion:"Fede Jordan" \},\
+  \{ candidate:"Francisco Azzollini", position:"Software Engineer", dri:"JP",    reviewers:["Lucas Berdiales","Franco Mucci"], devolucion:"Franco Mucci" \},\
+  \{ candidate:"Alan Matys",          position:"Software Engineer", dri:"JP",    reviewers:["Fede Jordan","Tobias"],        devolucion:"Fede Jordan" \},\
+  \{ candidate:"Gonzalo Alvarez",     position:"Software Engineer", dri:"Seven", reviewers:["Lucas Berdiales","Tobias"],    devolucion:"Lucas Berdiales" \},\
+  \{ candidate:"Nicol\'e1s Comerci",     position:"Software Engineer", dri:"JP",    reviewers:["Fede Jordan","Tobias"],        devolucion:"Fede Jordan" \},\
+  \{ candidate:"Leandro Serra",       position:"Software Engineer", dri:"JP",    reviewers:["Rocket","Tobias"],             devolucion:"Rocket" \},\
+];\
+\
+// \uc0\u9472 \u9472 \u9472  Counts \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+function counts() \{\
+  const d=\{\}, r=\{\}, dev=\{\};\
+  DRIS.forEach(x => d[x]=0);\
+  POOL.forEach(x => \{ r[x]=0; dev[x]=0; \});\
+  HISTORY.forEach(h => \{\
+    if (h.dri && d[h.dri]!==undefined) d[h.dri]++;\
+    (h.reviewers||[]).forEach(x => \{ if (r[x]!==undefined) r[x]++; \});\
+    if (h.devolucion && dev[h.devolucion]!==undefined) dev[h.devolucion]++;\
+  \});\
+  return \{ d, r, dev \};\
+\}\
+\
+function pickNext(cnt, pool, exclude) \{\
+  return [...pool].filter(p => !exclude.includes(p)).sort((a,b) => (cnt[a]||0)-(cnt[b]||0))[0];\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  Suggestion \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+function suggest(position) \{\
+  const \{ d, r, dev \} = counts();\
+  const isPD = position === "Product Designer";\
+  const dri = pickNext(d, DRIS, []);\
+  let r1, r2;\
+\
+  if (isPD) \{\
+    r1 = "Nicol\'e1s Santangelo";\
+    const pool2 = ONBOARDING.filter(x => x !== r1 && x !== dri && !REVIEWERS[x].mustPairWith);\
+    r2 = pool2.length ? pickNext(r, pool2, [r1]) : pickNext(r, POOL.filter(x => x!==r1&&x!==dri&&!REVIEWERS[x].mustPairWith), [r1]);\
+  \} else \{\
+    const tobiasCnt = r["Tobias"]||0;\
+    const avgOnb = ONBOARDING.reduce((s,x)=>s+(r[x]||0),0)/ONBOARDING.length;\
+    if (tobiasCnt <= avgOnb) \{\
+      r1 = "Tobias";\
+      const pairs = ["Lucas Serruya","Rocket"].filter(x => x!==dri);\
+      r2 = pickNext(r, pairs, [r1]);\
+    \} else \{\
+      const onbPool = ONBOARDING.filter(x => x!==dri && !REVIEWERS[x].mustPairWith);\
+      r1 = onbPool.length ? pickNext(r, onbPool, []) : pickNext(r, ONBOARDED.filter(x=>x!==dri), []);\
+      const p2 = POOL.filter(x => x!==r1&&x!==dri&&!REVIEWERS[x].pdOnly&&!REVIEWERS[x].mustPairWith);\
+      r2 = pickNext(r, p2, [r1]);\
+    \}\
+  \}\
+\
+  let devCandidates = [r1,r2].filter(Boolean);\
+  if (dri==="Seven") \{\
+    const ob = devCandidates.filter(x => REVIEWERS[x]?.status==="onboarded");\
+    if (ob.length) devCandidates = ob;\
+  \}\
+  const devolucion = devCandidates.sort((a,b)=>(dev[a]||0)-(dev[b]||0))[0];\
+  return \{ dri, r1, r2, devolucion \};\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  Render helpers \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+function labelFor(name) \{\
+  return name + (REVIEWERS[name]?.status==="onboarding" ? " \uc0\u55357 \u56580 " : "");\
+\}\
+\
+function populateSelect(id, options, selected) \{\
+  const el = document.getElementById(id);\
+  el.innerHTML = options.map(o => `<option$\{o===selected?" selected":""\}>$\{o\}</option>`).join("");\
+\}\
+\
+function renderWarnings() \{\
+  const dri = document.getElementById("sel-dri").value;\
+  const r1  = document.getElementById("sel-r1").value;\
+  const r2  = document.getElementById("sel-r2").value;\
+  const dev = document.getElementById("sel-dev").value;\
+  const pos = document.getElementById("position-select").value;\
+  const warns = [];\
+\
+  if (r1==="Tobias"||r2==="Tobias") \{\
+    const other = r1==="Tobias"?r2:r1;\
+    if (!["Lucas Serruya","Rocket"].includes(other))\
+      warns.push("\uc0\u9888  Tobias debe ir con Lucas Serruya o Rocket.");\
+  \}\
+  if (pos==="Product Designer" && r1!=="Nicol\'e1s Santangelo" && r2!=="Nicol\'e1s Santangelo")\
+    warns.push("\uc0\u9888  Product Designer requiere a Nicol\'e1s Santangelo como reviewer.");\
+  if (dri==="Seven" && REVIEWERS[dev]?.status==="onboarding")\
+    warns.push("\uc0\u9888  Seven solo puede hacer devoluciones con reviewers ya onboardeados.");\
+  if (![r1,r2].some(x=>REVIEWERS[x]?.status==="onboarding"))\
+    warns.push("\uc0\u9888  Ning\'fan reviewer en onboarding \'97 intent\'e1 incluir al menos uno.");\
+\
+  document.getElementById("warnings").innerHTML = warns.map(w=>`<div class="warning">$\{w\}</div>`).join("");\
+\}\
+\
+function renderMessage() \{\
+  const pos = document.getElementById("position-select").value;\
+  const dri = document.getElementById("sel-dri").value;\
+  const r1  = document.getElementById("sel-r1").value;\
+  const r2  = document.getElementById("sel-r2").value;\
+  const dev = document.getElementById("sel-dev").value;\
+  const msg = `Cre\'e1 el candidato [NOMBRE] para $\{pos\} con DRI $\{dri\}, reviewers $\{r1\} y $\{r2\}, devoluci\'f3n $\{dev\}`;\
+  document.getElementById("msg-box").textContent = msg;\
+  // summary\
+  document.getElementById("sum-dri").textContent = dri;\
+  document.getElementById("sum-r1").textContent  = labelFor(r1);\
+  document.getElementById("sum-r2").textContent  = labelFor(r2);\
+  document.getElementById("sum-dev").textContent = dev;\
+\}\
+\
+function renderBadges() \{\
+  const \{ d, r, dev \} = counts();\
+  const dri = document.getElementById("sel-dri").value;\
+  const r1  = document.getElementById("sel-r1").value;\
+  const r2  = document.getElementById("sel-r2").value;\
+  const devv= document.getElementById("sel-dev").value;\
+  document.getElementById("badge-dri").textContent = `$\{d[dri]||0\} reviews`;\
+  document.getElementById("badge-r1").textContent  = `$\{r[r1]||0\} rev \'b7 $\{dev[r1]||0\} dev$\{REVIEWERS[r1]?.status==="onboarding"?" \uc0\u55357 \u56580 ":""\}`;\
+  document.getElementById("badge-r2").textContent  = `$\{r[r2]||0\} rev \'b7 $\{dev[r2]||0\} dev$\{REVIEWERS[r2]?.status==="onboarding"?" \uc0\u55357 \u56580 ":""\}`;\
+  document.getElementById("badge-dev").textContent = `$\{dev[devv]||0\} devoluciones`;\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  Event handlers \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+function onPositionChange() \{\
+  const pos = document.getElementById("position-select").value;\
+  const pc = POS_COLORS[pos]||POS_COLORS["Other"];\
+  const chip = document.getElementById("pos-chip");\
+  chip.textContent = "\uc0\u9679  " + pos;\
+  chip.style.background = pc.bg;\
+  chip.style.color = pc.color;\
+  const s = suggest(pos);\
+  applySelection(s.dri, s.r1, s.r2, s.devolucion);\
+\}\
+\
+function applySelection(dri, r1, r2, devolucion) \{\
+  document.getElementById("sel-dri").value = dri;\
+  populateSelect("sel-r1", POOL.filter(x=>x!==r2).map(labelFor), labelFor(r1));\
+  populateSelect("sel-r2", POOL.filter(x=>x!==r1).map(labelFor), labelFor(r2));\
+  populateSelect("sel-dev", [r1,r2].map(labelFor), labelFor(devolucion));\
+  renderBadges(); renderWarnings(); renderMessage();\
+\}\
+\
+function onOverrideChange() \{\
+  const dri = document.getElementById("sel-dri").value;\
+  let r1  = document.getElementById("sel-r1").value.replace(" \uc0\u55357 \u56580 ","");\
+  let r2  = document.getElementById("sel-r2").value.replace(" \uc0\u55357 \u56580 ","");\
+  let dev = document.getElementById("sel-dev").value.replace(" \uc0\u55357 \u56580 ","");\
+  // rebuild r1/r2 options excluding each other\
+  populateSelect("sel-r1", POOL.filter(x=>x!==r2).map(labelFor), labelFor(r1));\
+  populateSelect("sel-r2", POOL.filter(x=>x!==r1).map(labelFor), labelFor(r2));\
+  // rebuild dev options\
+  const devOpts = [r1,r2];\
+  if (!devOpts.includes(dev)) dev = devOpts[0];\
+  populateSelect("sel-dev", devOpts.map(labelFor), labelFor(dev));\
+  renderBadges(); renderWarnings(); renderMessage();\
+\}\
+\
+function copyMsg() \{\
+  const msg = document.getElementById("msg-box").textContent;\
+  navigator.clipboard.writeText(msg).then(() => \{\
+    const btn = document.getElementById("copy-btn");\
+    btn.textContent = "\uc0\u9989  \'a1Copiado!";\
+    btn.classList.add("copied");\
+    setTimeout(() => \{ btn.textContent = "\uc0\u55357 \u56523  Copiar mensaje para Claude"; btn.classList.remove("copied"); \}, 2000);\
+  \});\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  Tab switch \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+function switchTab(tab) \{\
+  document.getElementById("tab-asignar").classList.toggle("hidden", tab!=="asignar");\
+  document.getElementById("tab-stats").classList.toggle("hidden", tab!=="stats");\
+  document.querySelectorAll(".tab").forEach((el,i) => el.classList.toggle("active", (i===0&&tab==="asignar")||(i===1&&tab==="stats")));\
+  if (tab==="stats") renderStats();\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  Stats \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+function renderBars(containerId, data, color) \{\
+  const max = Math.max(...Object.values(data), 1);\
+  const el = document.getElementById(containerId);\
+  el.innerHTML = Object.entries(data).sort((a,b)=>b[1]-a[1]).map(([name,cnt]) => `\
+    <div class="bar-row">\
+      <span class="bar-label">$\{name\}$\{REVIEWERS[name]?.status==="onboarding"?" \uc0\u55357 \u56580 ":""\}</span>\
+      <div class="bar-track"><div class="bar-fill" style="width:$\{(cnt/max)*100\}%;background:$\{cnt===0?"#e2e8f0":color\}"></div></div>\
+      <span class="bar-count" style="color:$\{cnt===0?"#94a3b8":color\}">$\{cnt\}</span>\
+    </div>`).join("");\
+\}\
+\
+function renderStats() \{\
+  const \{ d, r, dev \} = counts();\
+\
+  // Onboarding progress\
+  const goal = 4;\
+  document.getElementById("onboarding-bars").innerHTML = ONBOARDING.map(name => \{\
+    const cnt = r[name]||0;\
+    const pct = Math.min((cnt/goal)*100,100);\
+    const col = pct>=100?"#16a34a":"#f59e0b";\
+    return `<div class="progress-row">\
+      <span class="progress-label">$\{name\}</span>\
+      <div class="bar-track"><div class="bar-fill" style="width:$\{pct\}%;background:$\{col\}"></div></div>\
+      <span class="bar-count" style="color:$\{col\}">$\{cnt\}/$\{goal\}</span>\
+    </div>`;\
+  \}).join("");\
+\
+  // Profile chips\
+  const positions = ["Software Engineer","Mobile Engineer","Product Designer","Data Scientist","Platform Engineer","Other"];\
+  document.getElementById("profile-chips").innerHTML = positions.map(pos => \{\
+    const cnt = HISTORY.filter(h=>h.position===pos).length;\
+    if (!cnt) return "";\
+    const pc = POS_COLORS[pos]||POS_COLORS["Other"];\
+    return `<span class="chip" style="background:$\{pc.bg\};color:$\{pc.color\};border:1.5px solid $\{pc.color\}30">$\{pos\} <span style="opacity:.7">\'b7 $\{cnt\}</span></span>`;\
+  \}).join("");\
+\
+  renderBars("dri-bars", d, "#2563eb");\
+  renderBars("reviewer-bars", r, "#16a34a");\
+  renderBars("dev-bars", dev, "#b45309");\
+\
+  // History\
+  document.getElementById("history-title").textContent = `\uc0\u55357 \u56523  Historial ($\{HISTORY.length\})`;\
+  document.getElementById("history-list").innerHTML = [...HISTORY].reverse().map((h,i) => \{\
+    const pc = POS_COLORS[h.position]||POS_COLORS["Other"];\
+    return `<div class="history-item" style="background:$\{i%2===0?"#f8fafc":"#fff"\}">\
+      <span class="tag" style="background:$\{pc.bg\};color:$\{pc.color\}">$\{h.position?.split(" ")[0]\}</span>\
+      <span style="font-weight:700;color:#0f172a;min-width:120px">$\{h.candidate\}</span>\
+      <span style="color:#94a3b8"><span style="color:#2563eb;font-weight:600">$\{h.dri\}</span> \'b7 $\{h.reviewers?.join(", ")\} \'b7 <span style="color:#b45309;font-weight:600">$\{h.devolucion\}</span></span>\
+    </div>`;\
+  \}).join("");\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  Init \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+(function init() \{\
+  onPositionChange();\
+\})();\
+</script>\
+</body>\
+</html>\
+}
