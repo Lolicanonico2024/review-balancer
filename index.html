@@ -49,7 +49,7 @@ select:focus{border-color:#2563eb}
 
 <div style="margin-bottom:20px">
   <h1>🎯 Challenge Review Balancer</h1>
-  <p class="sub">Sync: <strong>09/04/2026</strong> · Fuente: Notion</p>
+  <p class="sub">Sync: <strong>09/04/2026 14:20</strong> · 15 reviews · Fuente: Notion</p>
 </div>
 
 <div class="tabs">
@@ -186,20 +186,21 @@ const POSITIONS = Object.keys(PC);
 
 // ─── Historial real (sync 09/04/2026) ─────────────────────────────────────────
 const HISTORY = [
-  {candidate:"Alfredo Perez Leal",  pos:"Mobile Engineer",   dri:"JP",    r1:"Kevin P.",      r2:"Lucas Berdiales", dev:"Lucas Berdiales"},
-  {candidate:"Gonzalo Martone",     pos:"Software Engineer", dri:"Seven", r1:"Kevin P.",      r2:"Lucas Serruya",   dev:"Lucas Serruya"},
-  {candidate:"Jerónimo Misa",       pos:"Software Engineer", dri:"JP",    r1:"Lucas Berdiales",r2:"Nator",          dev:"Nator"},
-  {candidate:"Claudio Barril",      pos:"Software Engineer", dri:"JP",    r1:"Nator",         r2:"Lucas Berdiales", dev:"Nator"},
-  {candidate:"Mauro Spivak",        pos:"Software Engineer", dri:"JP",    r1:"Kevin P.",      r2:"Fede Jordan",     dev:"Fede Jordan"},
-  {candidate:"Maximiliano Rey",     pos:"Software Engineer", dri:"JP",    r1:"Kevin P.",      r2:"Fede Jordan",     dev:"Fede Jordan"},
-  {candidate:"Francisco Azzollini", pos:"Software Engineer", dri:"JP",    r1:"Lucas Berdiales",r2:"Franco Mucci",   dev:"Franco Mucci"},
-  {candidate:"Alan Matys",          pos:"Software Engineer", dri:"JP",    r1:"Fede Jordan",   r2:"Tobias",          dev:"Fede Jordan"},
-  {candidate:"Gonzalo Alvarez",     pos:"Software Engineer", dri:"Seven", r1:"Lucas Berdiales",r2:"Tobias",         dev:"Lucas Berdiales"},
-  {candidate:"Nicolás Comerci",     pos:"Software Engineer", dri:"JP",    r1:"Fede Jordan",   r2:"Tobias",          dev:"Fede Jordan"},
-  {candidate:"Leandro Serra",       pos:"Software Engineer", dri:"JP",    r1:"Rocket",        r2:"Tobias",          dev:"Rocket"},
-  {candidate:"Federica Moletta",    pos:"Software Engineer", dri:"JP",    r1:"Fede Jordan",   r2:"Tobias",          dev:"Fede Jordan"},
-  {candidate:"Carlos Ferrari",      pos:"Data Scientist",    dri:"Seven", r1:"Alvaro Crespo", r2:"Franco Mucci",    dev:"Alvaro Crespo"},
-  {candidate:"Hernan Obst",         pos:"Software Engineer", dri:"JP",    r1:"Kevin P.",      r2:"Tobias",          dev:"Kevin P."},
+  {candidate:"Alfredo Perez Leal",  pos:"Mobile Engineer",   dri:"JP",    r1:"Kevin P.",       r2:"Lucas Berdiales", dev:"Lucas Berdiales"},
+  {candidate:"Gonzalo Martone",     pos:"Software Engineer", dri:"Seven", r1:"Kevin P.",       r2:"Lucas Serruya",   dev:"Lucas Serruya"},
+  {candidate:"Jerónimo Misa",       pos:"Software Engineer", dri:"JP",    r1:"Lucas Berdiales",r2:"Nator",           dev:"Nator"},
+  {candidate:"Claudio Barril",      pos:"Software Engineer", dri:"JP",    r1:"Nator",          r2:"Lucas Berdiales", dev:"Nator"},
+  {candidate:"Mauro Spivak",        pos:"Software Engineer", dri:"JP",    r1:"Kevin P.",       r2:"Fede Jordan",     dev:"Fede Jordan"},
+  {candidate:"Maximiliano Rey",     pos:"Software Engineer", dri:"JP",    r1:"Kevin P.",       r2:"Fede Jordan",     dev:"Fede Jordan"},
+  {candidate:"Francisco Azzollini", pos:"Software Engineer", dri:"JP",    r1:"Lucas Berdiales",r2:"Franco Mucci",    dev:"Franco Mucci"},
+  {candidate:"Alan Matys",          pos:"Software Engineer", dri:"JP",    r1:"Fede Jordan",    r2:"Tobias",          dev:"Fede Jordan"},
+  {candidate:"Gonzalo Alvarez",     pos:"Software Engineer", dri:"Seven", r1:"Lucas Berdiales",r2:"Tobias",          dev:"Lucas Berdiales"},
+  {candidate:"Nicolás Comerci",     pos:"Software Engineer", dri:"JP",    r1:"Fede Jordan",    r2:"Tobias",          dev:"Fede Jordan"},
+  {candidate:"Leandro Serra",       pos:"Software Engineer", dri:"JP",    r1:"Rocket",         r2:"Tobias",          dev:"Rocket"},
+  {candidate:"Federica Moletta",    pos:"Software Engineer", dri:"JP",    r1:"Fede Jordan",    r2:"Tobias",          dev:"Fede Jordan"},
+  {candidate:"Carlos Ferrari",      pos:"Data Scientist",    dri:"Seven", r1:"Alvaro Crespo",  r2:"Franco Mucci",    dev:"Alvaro Crespo"},
+  {candidate:"Hernan Obst",         pos:"Software Engineer", dri:"JP",    r1:"Kevin P.",       r2:"Tobias",          dev:"Kevin P."},
+  {candidate:"Fernando Zavalía",    pos:"Software Engineer", dri:"Seven", r1:"Lucas Serruya",  r2:"Rocket",          dev:"Lucas Serruya"},
 ];
 
 // ─── Counts ───────────────────────────────────────────────────────────────────
