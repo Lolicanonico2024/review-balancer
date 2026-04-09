@@ -23,12 +23,8 @@ h1{font-size:20px;font-weight:800;color:#0f172a}
 select{width:100%;padding:8px 10px;border-radius:8px;border:1.5px solid #e2e8f0;font-size:13px;background:#fff;cursor:pointer;outline:none;font-family:inherit}
 select:focus{border-color:#2563eb}
 .pos-sel{padding:9px 12px;font-weight:700}
-.summary{margin-top:12px;padding:12px 14px;background:#f1f5f9;border-radius:8px;font-size:13px;color:#334155;line-height:2}
-.msg{margin-top:10px;background:#f1f5f9;border-radius:8px;padding:10px 14px;font-size:12px;color:#334155;font-family:monospace;line-height:1.6;word-break:break-word;border:1.5px dashed #cbd5e1}
-.btn-copy{width:100%;padding:11px;border-radius:9px;border:1.5px solid #e2e8f0;background:#fff;cursor:pointer;font-size:13px;font-weight:700;color:#334155;margin-top:8px;font-family:inherit;transition:all .2s}
-.btn-copy.ok{background:#f0fdf4;border-color:#86efac;color:#16a34a}
+.summary{margin-top:12px;padding:14px 16px;background:#f1f5f9;border-radius:10px;font-size:14px;color:#334155;line-height:2.1}
 .warn{background:#fef3c7;border:1px solid #fcd34d;border-radius:7px;padding:7px 12px;font-size:12px;color:#92400e;margin-top:6px}
-.info{background:#fefce8;border:1.5px solid #fde68a;border-radius:12px;padding:12px 16px;margin-bottom:14px;font-size:13px;color:#92400e}
 .rules{background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 16px;font-size:12px;color:#64748b}
 .rules ol{margin:6px 0 0 16px;line-height:2.1}
 .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
@@ -39,11 +35,12 @@ select:focus{border-color:#2563eb}
 .chip{border-radius:99px;padding:4px 12px;font-size:12px;font-weight:700;display:inline-block;margin:3px}
 .prog-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .prog-lbl{width:135px;font-size:13px;color:#334155;flex-shrink:0}
-.hist-item{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-radius:7px;font-size:12px;border:1px solid #f1f5f9;margin-bottom:5px}
-.hist-scroll{max-height:320px;overflow-y:auto}
-.tag{border-radius:99px;padding:1px 8px;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
+.hist-item{display:flex;align-items:flex-start;gap:8px;padding:9px 12px;border-radius:8px;font-size:12px;border:1px solid #f1f5f9;margin-bottom:5px}
+.hist-scroll{max-height:380px;overflow-y:auto}
+.tag{border-radius:99px;padding:2px 8px;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px}
 .hidden{display:none}
-.stat-group{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.stat-group{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.divider{height:1px;background:#f1f5f9;margin:14px 0}
 @media(max-width:540px){.grid2,.stat-group{grid-template-columns:1fr}}
 </style>
 </head>
@@ -63,7 +60,6 @@ select:focus{border-color:#2563eb}
 
 <!-- ── ASIGNAR ── -->
 <div id="tab-asignar">
-  <div class="info"><strong>Flujo:</strong> Elegí la posición → revisá/ajustá la sugerencia → copiá el mensaje y pegalo en Claude para que cree la página en Notion.</div>
 
   <div class="card">
     <p class="st">Posición del candidato</p>
@@ -100,14 +96,14 @@ select:focus{border-color:#2563eb}
         <select id="s-dev" onchange="onChange()"></select>
       </div>
     </div>
+
     <div id="warnings"></div>
+
     <div class="summary">
       🔑 DRI: <strong id="sm-dri"></strong><br>
       👤 Reviewers: <strong id="sm-r1"></strong> + <strong id="sm-r2"></strong><br>
-      🎤 Devolución: <strong id="sm-dev" style="color:#b45309"></strong>
+      🎤 Va a devolución: <strong id="sm-dev" style="color:#b45309"></strong>
     </div>
-    <div class="msg" id="msg"></div>
-    <button class="btn-copy" id="copybtn" onclick="copyMsg()">📋 Copiar mensaje para Claude</button>
   </div>
 
   <div class="rules">
@@ -134,7 +130,7 @@ select:focus{border-color:#2563eb}
   </div>
   <div class="stat-group">
     <div class="card">
-      <p class="st">🔑 DRI — reviews totales</p>
+      <p class="st">🔑 DRI — total reviews</p>
       <div id="dri-bars"></div>
     </div>
     <div class="card">
@@ -143,11 +139,11 @@ select:focus{border-color:#2563eb}
     </div>
   </div>
   <div class="card">
-    <p class="st">👤 Reviewer load — veces como reviewer</p>
+    <p class="st">👤 Reviewers — veces como reviewer</p>
     <div id="rev-bars"></div>
   </div>
   <div class="card">
-    <p class="st">🎤 Reviewer load — veces en devolución</p>
+    <p class="st">🎤 Reviewers — veces en devolución</p>
     <div id="dev-bars"></div>
   </div>
 </div>
@@ -174,9 +170,9 @@ const RV = {
   "Kevin P.":           {s:"onboarding"},
   "Tobias":             {s:"onboarding", pairWith:["Lucas Serruya","Rocket"]},
 };
-const POOL      = Object.keys(RV);
-const ONBOARDED = POOL.filter(r=>RV[r].s==="onboarded");
-const ONBOARDING= POOL.filter(r=>RV[r].s==="onboarding");
+const POOL       = Object.keys(RV);
+const ONBOARDED  = POOL.filter(r=>RV[r].s==="onboarded");
+const ONBOARDING = POOL.filter(r=>RV[r].s==="onboarding");
 
 const PC = {
   "Software Engineer": {bg:"#eff6ff",c:"#2563eb"},
@@ -188,41 +184,34 @@ const PC = {
 };
 const POSITIONS = Object.keys(PC);
 
-// ─── Historial real desde Notion (09/04/2026) ─────────────────────────────────
-// Fuentes: Candidates Coding Review + Already Done
+// ─── Historial real (sync 09/04/2026) ─────────────────────────────────────────
 const HISTORY = [
-  // Already Done — recientes
-  {candidate:"Alfredo Perez Leal",  pos:"Mobile Engineer",   dri:"JP",    r1:"Kevin P.",     r2:"Lucas Berdiales", dev:"Lucas Berdiales"},
-  {candidate:"Gonzalo Martone",     pos:"Software Engineer", dri:"Seven", r1:"Kevin P.",     r2:"Lucas Serruya",   dev:"Lucas Serruya"},
-  {candidate:"Jerónimo Misa",       pos:"Software Engineer", dri:"JP",    r1:"Lucas Berdiales",r2:"Nator",         dev:"Nator"},
-  {candidate:"Claudio Barril",      pos:"Software Engineer", dri:"JP",    r1:"Nator",        r2:"Lucas Berdiales", dev:"Nator"},
-  {candidate:"Mauro Spivak",        pos:"Software Engineer", dri:"JP",    r1:"Kevin P.",     r2:"Fede Jordan",     dev:"Fede Jordan"},
-  {candidate:"Maximiliano Rey",     pos:"Software Engineer", dri:"JP",    r1:"Kevin P.",     r2:"Fede Jordan",     dev:"Fede Jordan"},
-  {candidate:"Francisco Azzollini", pos:"Software Engineer", dri:"JP",    r1:"Lucas Berdiales",r2:"Franco Mucci",  dev:"Franco Mucci"},
-  {candidate:"Alan Matys",          pos:"Software Engineer", dri:"JP",    r1:"Fede Jordan",  r2:"Tobias",          dev:"Fede Jordan"},
-  {candidate:"Gonzalo Alvarez",     pos:"Software Engineer", dri:"Seven", r1:"Lucas Berdiales",r2:"Tobias",        dev:"Lucas Berdiales"},
-  {candidate:"Nicolás Comerci",     pos:"Software Engineer", dri:"JP",    r1:"Fede Jordan",  r2:"Tobias",          dev:"Fede Jordan"},
-  {candidate:"Leandro Serra",       pos:"Software Engineer", dri:"JP",    r1:"Rocket",       r2:"Tobias",          dev:"Rocket"},
-  // Activos recientes
-  {candidate:"Federica Moletta",    pos:"Software Engineer", dri:"JP",    r1:"Fede Jordan",  r2:"Tobias",          dev:"Fede Jordan"},
-  {candidate:"Carlos Ferrari",      pos:"Data Scientist",    dri:"Seven", r1:"Alvaro Crespo",r2:"Franco Mucci",    dev:"Alvaro Crespo"},
-  {candidate:"Hernan Obst",         pos:"Software Engineer", dri:"JP",    r1:"Kevin P.",     r2:"Tobias",          dev:"Kevin P."},
+  {candidate:"Alfredo Perez Leal",  pos:"Mobile Engineer",   dri:"JP",    r1:"Kevin P.",      r2:"Lucas Berdiales", dev:"Lucas Berdiales"},
+  {candidate:"Gonzalo Martone",     pos:"Software Engineer", dri:"Seven", r1:"Kevin P.",      r2:"Lucas Serruya",   dev:"Lucas Serruya"},
+  {candidate:"Jerónimo Misa",       pos:"Software Engineer", dri:"JP",    r1:"Lucas Berdiales",r2:"Nator",          dev:"Nator"},
+  {candidate:"Claudio Barril",      pos:"Software Engineer", dri:"JP",    r1:"Nator",         r2:"Lucas Berdiales", dev:"Nator"},
+  {candidate:"Mauro Spivak",        pos:"Software Engineer", dri:"JP",    r1:"Kevin P.",      r2:"Fede Jordan",     dev:"Fede Jordan"},
+  {candidate:"Maximiliano Rey",     pos:"Software Engineer", dri:"JP",    r1:"Kevin P.",      r2:"Fede Jordan",     dev:"Fede Jordan"},
+  {candidate:"Francisco Azzollini", pos:"Software Engineer", dri:"JP",    r1:"Lucas Berdiales",r2:"Franco Mucci",   dev:"Franco Mucci"},
+  {candidate:"Alan Matys",          pos:"Software Engineer", dri:"JP",    r1:"Fede Jordan",   r2:"Tobias",          dev:"Fede Jordan"},
+  {candidate:"Gonzalo Alvarez",     pos:"Software Engineer", dri:"Seven", r1:"Lucas Berdiales",r2:"Tobias",         dev:"Lucas Berdiales"},
+  {candidate:"Nicolás Comerci",     pos:"Software Engineer", dri:"JP",    r1:"Fede Jordan",   r2:"Tobias",          dev:"Fede Jordan"},
+  {candidate:"Leandro Serra",       pos:"Software Engineer", dri:"JP",    r1:"Rocket",        r2:"Tobias",          dev:"Rocket"},
+  {candidate:"Federica Moletta",    pos:"Software Engineer", dri:"JP",    r1:"Fede Jordan",   r2:"Tobias",          dev:"Fede Jordan"},
+  {candidate:"Carlos Ferrari",      pos:"Data Scientist",    dri:"Seven", r1:"Alvaro Crespo", r2:"Franco Mucci",    dev:"Alvaro Crespo"},
+  {candidate:"Hernan Obst",         pos:"Software Engineer", dri:"JP",    r1:"Kevin P.",      r2:"Tobias",          dev:"Kevin P."},
 ];
 
 // ─── Counts ───────────────────────────────────────────────────────────────────
-function getCounts() {
+function getCounts(){
   const dri={JP:0,Seven:0}, rev={}, dev={}, driDev={JP:0,Seven:0};
   POOL.forEach(r=>{rev[r]=0;dev[r]=0;});
   HISTORY.forEach(h=>{
-    if(dri[h.dri]!==undefined) dri[h.dri]++;
-    if(h.r1&&rev[h.r1]!==undefined) rev[h.r1]++;
-    if(h.r2&&rev[h.r2]!==undefined) rev[h.r2]++;
-    if(h.dev){
-      if(dev[h.dev]!==undefined) dev[h.dev]++;
-      if(driDev[h.dev]!==undefined) driDev[h.dev]++; // dev by DRI themselves (rare)
-      // also count if DRI did devolucion
-      if(h.dri===h.dev) driDev[h.dri]++;
-    }
+    if(h.dri in dri) dri[h.dri]++;
+    if(h.r1 in rev) rev[h.r1]++;
+    if(h.r2 in rev) rev[h.r2]++;
+    if(h.dev in dev) dev[h.dev]++;
+    if(h.dri in driDev) driDev[h.dri]++; // DRI always attends devolución
   });
   return {dri,rev,dev,driDev};
 }
@@ -234,8 +223,8 @@ function pickNext(cnt,pool,excl){
 // ─── Suggest ──────────────────────────────────────────────────────────────────
 function suggest(pos){
   const {dri,rev,dev}=getCounts();
-  const isPD = pos==="Product Designer";
-  const d = pickNext(dri,DRIS,[]);
+  const isPD=pos==="Product Designer";
+  const d=pickNext(dri,DRIS,[]);
   let r1,r2;
   if(isPD){
     r1="Nicolás Santangelo";
@@ -256,19 +245,14 @@ function suggest(pos){
     }
   }
   let devC=[r1,r2].filter(Boolean);
-  if(d==="Seven"){
-    const ob=devC.filter(r=>RV[r]?.s==="onboarded");
-    if(ob.length) devC=ob;
-  }
+  if(d==="Seven"){const ob=devC.filter(r=>RV[r]?.s==="onboarded");if(ob.length)devC=ob;}
   const dv=devC.sort((a,b)=>(dev[a]||0)-(dev[b]||0))[0];
   return {d,r1,r2,dv};
 }
 
-// ─── Label ────────────────────────────────────────────────────────────────────
 function lbl(n){return n+(RV[n]?.s==="onboarding"?" 🔄":"");}
 function clean(v){return v.replace(" 🔄","");}
 
-// ─── Render ───────────────────────────────────────────────────────────────────
 function fillSelect(id,opts,sel){
   const el=document.getElementById(id);
   el.innerHTML=opts.map(o=>`<option${o===sel?" selected":""}>${o}</option>`).join("");
@@ -279,7 +263,7 @@ function apply(d,r1,r2,dv){
   fillSelect("s-r1",POOL.filter(r=>r!==r2).map(lbl),lbl(r1));
   fillSelect("s-r2",POOL.filter(r=>r!==r1).map(lbl),lbl(r2));
   fillSelect("s-dev",[r1,r2].filter(Boolean).map(lbl),lbl(dv));
-  renderBadges();renderWarns();renderMsg();
+  renderBadges();renderWarns();renderSummary();
 }
 
 function renderBadges(){
@@ -314,20 +298,17 @@ function renderWarns(){
   document.getElementById("warnings").innerHTML=w.map(x=>`<div class="warn">${x}</div>`).join("");
 }
 
-function renderMsg(){
-  const pos=document.getElementById("pos").value;
+function renderSummary(){
   const d=document.getElementById("s-dri").value;
   const r1=clean(document.getElementById("s-r1").value);
   const r2=clean(document.getElementById("s-r2").value);
   const dv=clean(document.getElementById("s-dev").value);
-  document.getElementById("msg").textContent=`Creá el candidato [NOMBRE] para ${pos} con DRI ${d}, reviewers ${r1} y ${r2}, devolución ${dv}`;
   document.getElementById("sm-dri").textContent=d;
   document.getElementById("sm-r1").textContent=lbl(r1);
   document.getElementById("sm-r2").textContent=lbl(r2);
   document.getElementById("sm-dev").textContent=dv;
 }
 
-// ─── Events ───────────────────────────────────────────────────────────────────
 function onPos(){
   const pos=document.getElementById("pos").value;
   const pc=PC[pos]||PC["Other"];
@@ -345,18 +326,9 @@ function onChange(){
   fillSelect("s-r2",POOL.filter(r=>r!==r1).map(lbl),lbl(r2));
   const devOpts=[r1,r2].filter(Boolean);
   fillSelect("s-dev",devOpts.map(lbl),devOpts.includes(dv)?lbl(dv):lbl(devOpts[0]));
-  renderBadges();renderWarns();renderMsg();
+  renderBadges();renderWarns();renderSummary();
 }
 
-function copyMsg(){
-  navigator.clipboard.writeText(document.getElementById("msg").textContent).then(()=>{
-    const b=document.getElementById("copybtn");
-    b.textContent="✅ ¡Copiado!";b.classList.add("ok");
-    setTimeout(()=>{b.textContent="📋 Copiar mensaje para Claude";b.classList.remove("ok");},2000);
-  });
-}
-
-// ─── Tab switch ───────────────────────────────────────────────────────────────
 function switchTab(t){
   ["asignar","stats","historial"].forEach(id=>{
     document.getElementById("tab-"+id).classList.toggle("hidden",id!==t);
@@ -368,7 +340,6 @@ function switchTab(t){
   if(t==="historial") renderHistorial();
 }
 
-// ─── Stats ────────────────────────────────────────────────────────────────────
 function barRow(name,count,max,color){
   const pct=max?Math.min((count/max)*100,100):0;
   return `<div class="bar-row">
@@ -379,9 +350,7 @@ function barRow(name,count,max,color){
 }
 
 function renderStats(){
-  const {dri,rev,dev}=getCounts();
-
-  // Onboarding
+  const {dri,rev,dev,driDev}=getCounts();
   const goal=4;
   document.getElementById("onb-bars").innerHTML=ONBOARDING.map(name=>{
     const cnt=rev[name]||0;
@@ -394,7 +363,6 @@ function renderStats(){
     </div>`;
   }).join("");
 
-  // Profile chips
   document.getElementById("prof-chips").innerHTML=POSITIONS.map(pos=>{
     const cnt=HISTORY.filter(h=>h.pos===pos).length;
     if(!cnt) return "";
@@ -402,54 +370,45 @@ function renderStats(){
     return `<span class="chip" style="background:${pc.bg};color:${pc.c};border:1.5px solid ${pc.c}30">${pos} <span style="opacity:.7">· ${cnt}</span></span>`;
   }).join("");
 
-  // DRI reviews
   const maxDri=Math.max(...Object.values(dri),1);
   document.getElementById("dri-bars").innerHTML=Object.entries(dri).sort((a,b)=>b[1]-a[1])
     .map(([n,c])=>barRow(n,c,maxDri,"#2563eb")).join("");
 
-  // DRI devoluciones (counted when DRI also does the devolucion interview)
-  const driDevCnt={JP:0,Seven:0};
-  HISTORY.forEach(h=>{ if(h.dev===h.dri||h.dev==="JP"||h.dev==="Seven") {} }); // devolucion is always a reviewer, not DRI
-  // Actually count devoluciones that the DRI attends (always, since DRI is at devolucion)
-  HISTORY.forEach(h=>{ if(h.dri) driDevCnt[h.dri]=(driDevCnt[h.dri]||0)+1; });
-  const maxDriDev=Math.max(...Object.values(driDevCnt),1);
-  document.getElementById("dri-dev-bars").innerHTML=Object.entries(driDevCnt).sort((a,b)=>b[1]-a[1])
+  const maxDriDev=Math.max(...Object.values(driDev),1);
+  document.getElementById("dri-dev-bars").innerHTML=Object.entries(driDev).sort((a,b)=>b[1]-a[1])
     .map(([n,c])=>barRow(n,c,maxDriDev,"#7c3aed")).join("");
 
-  // Reviewer bars
-  const revEntries=Object.entries(rev).filter(([n])=>!RV[n]?.pdOnly).sort((a,b)=>b[1]-a[1]);
-  const maxRev=Math.max(...revEntries.map(e=>e[1]),1);
-  document.getElementById("rev-bars").innerHTML=revEntries
+  const revE=Object.entries(rev).filter(([n])=>!RV[n]?.pdOnly).sort((a,b)=>b[1]-a[1]);
+  const maxRev=Math.max(...revE.map(e=>e[1]),1);
+  document.getElementById("rev-bars").innerHTML=revE
     .map(([n,c])=>barRow(n+(RV[n]?.s==="onboarding"?" 🔄":""),c,maxRev,"#16a34a")).join("");
 
-  // Devolución bars
-  const devEntries=Object.entries(dev).filter(([n])=>!RV[n]?.pdOnly).sort((a,b)=>b[1]-a[1]);
-  const maxDev=Math.max(...devEntries.map(e=>e[1]),1);
-  document.getElementById("dev-bars").innerHTML=devEntries
+  const devE=Object.entries(dev).filter(([n])=>!RV[n]?.pdOnly).sort((a,b)=>b[1]-a[1]);
+  const maxDev=Math.max(...devE.map(e=>e[1]),1);
+  document.getElementById("dev-bars").innerHTML=devE
     .map(([n,c])=>barRow(n+(RV[n]?.s==="onboarding"?" 🔄":""),c,maxDev,"#b45309")).join("");
 }
 
-// ─── Historial ────────────────────────────────────────────────────────────────
 function renderHistorial(){
   document.getElementById("hist-title").textContent=`Historial completo — ${HISTORY.length} reviews`;
   document.getElementById("hist-list").innerHTML=[...HISTORY].reverse().map((h,i)=>{
     const pc=PC[h.pos]||PC["Other"];
-    const devIsOnb=RV[h.dev]?.s==="onboarding"?" 🔄":"";
     return `<div class="hist-item" style="background:${i%2===0?"#f8fafc":"#fff"}">
       <span class="tag" style="background:${pc.bg};color:${pc.c}">${h.pos.split(" ")[0]}</span>
       <div style="flex:1;min-width:0">
         <span style="font-weight:700;color:#0f172a">${h.candidate}</span><br>
-        <span style="color:#64748b">
+        <span style="color:#64748b;font-size:11px">
           DRI: <span style="color:#2563eb;font-weight:600">${h.dri}</span>
-          &nbsp;·&nbsp; Reviewers: <span style="font-weight:500">${h.r1}</span> + <span style="font-weight:500">${h.r2}</span>
-          &nbsp;·&nbsp; Dev: <span style="color:#b45309;font-weight:600">${h.dev}${devIsOnb}</span>
+          &nbsp;·&nbsp;
+          Reviewers: <span style="font-weight:500">${h.r1}</span> + <span style="font-weight:500">${h.r2}</span>
+          &nbsp;·&nbsp;
+          Dev: <span style="color:#b45309;font-weight:600">${h.dev}</span>
         </span>
       </div>
     </div>`;
   }).join("");
 }
 
-// ─── Init ─────────────────────────────────────────────────────────────────────
 onPos();
 </script>
 </body>
